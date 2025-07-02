@@ -1,5 +1,6 @@
 import { assets } from '../../assets/assets'
 import { useStoreContext } from '../../hooks/useStoreContext';
+// eslint-disable-next-line
 import { motion } from 'framer-motion';
 
 const FoodItem = ({id, name, image, price, description}) => {
