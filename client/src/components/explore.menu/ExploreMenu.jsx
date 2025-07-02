@@ -10,7 +10,7 @@ const ExploreMenu = ({category, setCategory}) => {
             {menu_list.map((item, index) => {
                 return(
                     <div onClick={() => setCategory(prev=>prev === item.menu_name ? 'All' : item.menu_name)} key={index} className='flex flex-col items-center gap-3 cursor-pointer my-5'>
-                        <img src={item.menu_image} alt={item.menu_name} className={`rounded-full ${category === item.menu_name ? 'border-4 border-orange-500 duration-500' : ' border-4 border-transparent'}`} />
+                        <img src={item.menu_image} alt={item.menu_name} className={`rounded-full ${category === item.menu_name ? 'border-4 border-orange-500 p-0.5 duration-500' : ' border-4 border-transparent p-0.5'}`} />
                         <p className='text-gray-500'>{item.menu_name}</p>
                     </div>
                 )

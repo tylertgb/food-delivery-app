@@ -1,0 +1,21 @@
+
+import { useStoreContext } from '../../hooks/useStoreContext'
+import FoodItem from '../food.item/FoodItem'
+
+const FoodDisplay = ({category}) => {
+    const {food_list} = useStoreContext()
+  return (
+    <div className='flex flex-col items-start gap-10'>
+        <h2 className='text-3xl font-semibold'>Top Dishes Near You</h2>
+        <div className='grid grid-cols-3 gap-6'>
+            {food_list.map((item, index) => {
+                return(
+                    <FoodItem key={index} id={item._id} name={item.name} image={item.image} price={item.price} description={item.description} />
+                )
+            })}
+        </div>
+    </div>
+  )
+}
+
+export default FoodDisplay
