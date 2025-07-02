@@ -1,7 +1,7 @@
 import React from 'react'
 import { menu_list } from '../../assets/assets'
 
-const ExploreMenu = () => {
+const ExploreMenu = ({category, setCategory}) => {
   return (
     <div className='py-20'>
         <h1 className='text-3xl font-semibold'>Explore Menu</h1>
@@ -9,13 +9,14 @@ const ExploreMenu = () => {
         <div className='explore-menu-list flex items-center justify-between gap-6 overflow-x-scroll w-full mt-8'>
             {menu_list.map((item, index) => {
                 return(
-                    <div key={index} className='flex flex-col items-center gap-3 cursor-pointer my-5'>
-                        <img src={item.menu_image} alt={item.menu_name} className='rounded-full w-36 min-w-36' />
+                    <div onClick={() => setCategory(prev=>prev === item.menu_name ? 'All' : item.menu_name)} key={index} className='flex flex-col items-center gap-3 cursor-pointer my-5'>
+                        <img src={item.menu_image} alt={item.menu_name} className={`rounded-full ${category === item.menu_name ? 'border-4 border-orange-500 duration-500' : ' border-4 border-transparent'}`} />
                         <p className='text-gray-500'>{item.menu_name}</p>
                     </div>
                 )
             })}
         </div>
+        <hr className='bg-gray-100 h-1 border-0'/>
     </div>
   )
 }
