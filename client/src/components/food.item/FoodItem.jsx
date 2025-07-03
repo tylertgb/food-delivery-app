@@ -3,6 +3,8 @@ import { useStoreContext } from '../../hooks/useStoreContext';
 // eslint-disable-next-line
 import { motion } from 'framer-motion';
 
+//Here in the cart page the items added to cart, when i use the remove from cart for a particular item, when i subtract to 0 and beyound it remove the other items added. Why it is this happening?
+
 const FoodItem = ({id, name, image, price, description}) => {
     const {cartItems, addToCart, removeFromCart} = useStoreContext();
     return (
@@ -15,7 +17,7 @@ const FoodItem = ({id, name, image, price, description}) => {
         >
             <div className='overflow-hidden rounded-2xl relative'>
                 <div className='z-10 absolute bottom-0 w-full h-20 bg-gradient-to-t from-orange-400 to-transparent'>
-                    <span className='h-10 w-20 rounded-tr-2xl rounded-br-2xl flex items-center justify-center bg-white text-black text-xl font-semibold'>
+                    <span className='h-10 w-20 rounded-tr-2xl rounded-br-2xl flex items-center justify-center bg-white text-black text-lg font-semibold'>
                         ${price.toFixed(2)}
                     </span>
                 </div>

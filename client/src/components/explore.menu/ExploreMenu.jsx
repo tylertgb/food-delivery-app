@@ -3,7 +3,7 @@ import { menu_list } from '../../assets/assets'
 
 const ExploreMenu = ({category, setCategory}) => {
   return (
-    <div className='py-20'>
+    <div id='menu' className='pt-20 pb-10'>
         <h1 className='text-3xl font-semibold'>Explore Menu</h1>
         <p className='text-lg text-gray-500 mt-3'>Choose from a diverse menu featuring a deletable array of dishes. Our mission is to provide food of various menu to our customers</p>
         <div className='explore-menu-list flex items-center justify-between gap-3 md:gap-6 overflow-x-scroll w-full mt-8'>

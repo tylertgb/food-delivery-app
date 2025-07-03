@@ -3,47 +3,62 @@ import { food_list } from "../assets/assets";
 
 export const StoreContext = createContext(null);
 
-const StoreContextProvider = ({children}) => {
-
+const StoreContextProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState({});
 
     const addToCart = (itemId) => {
         setCartItems((prev) => ({
             ...prev,
-            [itemId]: prev[itemId] ? prev[itemId] + 1 : 1
+            [itemId]: prev[itemId] ? prev[itemId] + 1 : 1,
         }));
     };
 
-    const removeFromCart = (itemId) => {
-        setCartItems((prev) => {
-            if (!prev[itemId]) return prev;
-            const updatedCart = { ...prev };
-            if (updatedCart[itemId] === 1) {
-                delete updatedCart[itemId];
-            } else {
-                updatedCart[itemId] -= 1;
+    const removeFromCart = (id) => {
+        setCartItems((prevCartItems) => {
+            const newCartItems = { ...prevCartItems };
+            if (newCartItems[id] > 0) {
+                newCartItems[id] -= 1;
+                if (newCartItems[id] === 0) {
+                    delete newCartItems[id];
+                }
             }
-            return updatedCart;
+            return newCartItems;
         });
+    };
+
+    // Delete item from cart regardless of quantity
+    const deleteFromCart = (id) => {
+        setCartItems((prevCartItems) => {
+            const newCartItems = { ...prevCartItems };
+            delete newCartItems[id];
+            return newCartItems;
+        });
+    };
+
+    // Clear the entire cart
+    const clearCart = () => {
+        setCartItems({});
     };
 
     useEffect(() => {
         console.log(cartItems);
-    }, [cartItems])
+    }, [cartItems]);
 
     const contextValue = {
         food_list,
         cartItems,
         setCartItems,
         addToCart,
-        removeFromCart
-    }
+        removeFromCart,
+        deleteFromCart,
+        clearCart,
+    };
 
-    return(
+    return (
         <StoreContext.Provider value={contextValue}>
             {children}
         </StoreContext.Provider>
-    )
-}
+    );
+};
 
-export default StoreContextProvider
+export default StoreContextProvider;
