@@ -7,7 +7,7 @@ const FoodDisplay = ({category}) => {
   return (
     <div className='flex flex-col items-start gap-10 pb-20'>
         <h2 className='text-3xl font-semibold'>Top Dishes Near You</h2>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
             {food_list.map((item, index) => {
                 if(category === "All" || item.category === category){
                     return(

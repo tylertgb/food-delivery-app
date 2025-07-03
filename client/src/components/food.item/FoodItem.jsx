@@ -22,12 +22,12 @@ const FoodItem = ({id, name, image, price, description}) => {
                 <img src={image} alt={name} className='z-0 w-full h-full rounded-2xl object-cover hover:scale-110 duration-500 ' />
                 <div className='absolute top-0 right-3 bg-white rounded-full flex items-center p-1 mt-3'>
                     {!cartItems[id] ? (
-                        <img src={assets.add_icon_white} alt="" onClick={() => addToCart(id)} className='w-10' />
+                        <img src={assets.add_icon_white} alt="" onClick={() => addToCart(id)} className='w-8' />
                     ) : (
                         <div className='flex items-center gap-2'>
-                            <img src={assets.remove_icon_red} alt="" onClick={() => removeFromCart(id)} className='w-9' />
+                            <img src={assets.remove_icon_red} alt="" onClick={() => removeFromCart(id)} className='w-8' />
                             <span className='text-gray-600'>{cartItems[id]}</span>
-                            <img src={assets.add_icon_green} alt="" onClick={() => addToCart(id)} className='w-9' />
+                            <img src={assets.add_icon_green} alt="" onClick={() => addToCart(id)} className='w-8' />
                         </div>
                     )}
                 </div>
