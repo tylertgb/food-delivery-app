@@ -29,12 +29,12 @@ const Cart = () => {
            {food_list.map((item) => {
             if(cartItems[item._id] > 0){
               return(
-                <div className="grid grid-cols-6 items-center gap-4 bg-gray-50/50 border border-gray-50 p-1 rounded-2xl">
+                <div className="grid grid-cols-6 items-center gap-4 bg-gray-50/50 border border-gray-50 p-1 rounded-2xl" key={item._id}>
                   <img src={item.image} alt={item.name} className="w-14 h-14 object-cover rounded-xl" />
                   <h3 className="md:text-lg">{item.name}</h3>
-                  <p> ${item.price.toFixed(2)}</p>
+                  <p> GH₵{item.price.toFixed(2)}</p>
                   <p className='hidden md:flex'>{cartItems[item._id]}</p>
-                  <p>${item.price.toFixed(2)*cartItems[item._id]}</p>
+                  <p>GH₵{(item.price * cartItems[item._id]).toFixed(2)}</p>
 
                   <div className='flex  items-center justify-start gap-2'>                   
                     <div className=''>
@@ -51,36 +51,41 @@ const Cart = () => {
                     <RiDeleteBinLine onClick={() => deleteFromCart(item._id)} size={24} title="Delete" className="hidden md:flex text-red-600 cursor-pointer"/>
                   </div>
                 </div>
-              )
+              );
             }
-          })}
-        </div>
-
-        <div className='my-4'>
-          {Object.keys(cartItems).length > 0 && (
-            <button title='Clear Cart' onClick={clearCart} className="bg-red-600 text-white py-3 px-6 rounded-xl mt-4">Clear Cart</button>
-          )}
-        </div>
-
-        <div className='flex flex-col md:flex-row items-start justify-between gap-8 mt-20'>
-          <div className='w-full md:w-2/6'>
-            <h2 className='text-2xl font-bold text-gray-700 mb-6'>Cart Total</h2>
-            <div className='w-full'>
-              <div className='flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600'>
-                <p>Subtotal</p>
-                <b>${getCartSubtotal().toFixed(2)}</b>
-              </div>
-              <div className='flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600'>
-                <p>Delivery Fee</p>
-                <b>${deliveryFee.toFixed(2)}</b>
-              </div>
-              <div className='flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600'>
-                <p>Total</p>
-                <b>${getCartTotal().toFixed(2)}</b>
-              </div>
+            return null;
+           })}
             </div>
 
-            <button onClick={() => {navigate('/order')}} className="bg-black w-full font-semibold text-white capitalize py-3 px-6 rounded-xl mt-12">Proceed to Checkout</button>
+            <div className='my-4'>
+              {Object.keys(cartItems).length > 0 && (
+              <button title='Clear Cart' onClick={clearCart} className="bg-red-600 text-white py-3 px-6 rounded-xl mt-4">Clear Cart</button>
+              )}
+            </div>
+
+            <div className='flex flex-col md:flex-row items-start justify-between gap-8 mt-20'>
+              <div className='w-full md:w-2/6'>
+              <h2 className='text-2xl font-bold text-gray-700 mb-6'>Cart Total</h2>
+              <div className='w-full'>
+                <div className='flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600'>
+                  <p>Subtotal</p>
+                  <b>GH₵{getCartSubtotal().toFixed(2)}</b>
+                  </div>
+                  <div className='flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600'>
+                  <p>Delivery Fee</p>
+                  <b>GH₵{getCartSubtotal() > 0 ? deliveryFee.toFixed(2) : (0).toFixed(2)}</b>
+                  </div>
+                  <div className='flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600'>
+                  <p>Total</p>
+                  <b>
+                    GH₵{getCartSubtotal() > 0 
+                    ? (getCartTotal() + deliveryFee).toFixed(2) 
+                    : (0).toFixed(2)}
+                  </b>
+                </div>
+              </div>
+
+              <button onClick={() => {navigate('/order')}} className="bg-black w-full font-semibold text-white capitalize py-3 px-6 rounded-xl mt-12">Proceed to Checkout</button>
           </div>
 
           <div className='w-full md:w-2/5'>

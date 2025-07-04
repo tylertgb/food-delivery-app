@@ -28,7 +28,10 @@ const PlaceOrder = () => {
         <form className="space-y-4">
           <div className="flex flex-col md:flex-row items-center gap-2">
             <div>
-              <label className="font-normal text-gray-600 mb-1" htmlFor="firstname">
+              <label
+                className="font-normal text-gray-600 mb-1"
+                htmlFor="firstname"
+              >
                 First Name
               </label>
               <input
@@ -42,7 +45,10 @@ const PlaceOrder = () => {
               />
             </div>
             <div>
-              <label className="font-normal text-gray-600 mb-1" htmlFor="lastname">
+              <label
+                className="font-normal text-gray-600 mb-1"
+                htmlFor="lastname"
+              >
                 Last Name
               </label>
               <input
@@ -86,7 +92,10 @@ const PlaceOrder = () => {
               />
             </div>
             <div>
-              <label className="font-normal text-gray-600 mb-1" htmlFor="postalCode">
+              <label
+                className="font-normal text-gray-600 mb-1"
+                htmlFor="postalCode"
+              >
                 Postal Code
               </label>
               <input
@@ -131,7 +140,10 @@ const PlaceOrder = () => {
             </div>
           </div>
           <div>
-            <label className="block font-normal text-gray-600 mb-1" htmlFor="instructions">
+            <label
+              className="block font-normal text-gray-600 mb-1"
+              htmlFor="instructions"
+            >
               Delivery Instructions
             </label>
             <textarea
@@ -151,15 +163,23 @@ const PlaceOrder = () => {
         <div className="w-full">
           <div className="flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600">
             <p>Subtotal</p>
-            <b>${getCartSubtotal().toFixed(2)}</b>
+            <b>GH₵{getCartSubtotal().toFixed(2)}</b>
           </div>
           <div className="flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600">
             <p>Delivery Fee</p>
-            <b>${deliveryFee.toFixed(2)}</b>
+            <b>
+              GH₵
+              {getCartSubtotal() > 0 ? deliveryFee.toFixed(2) : (0).toFixed(2)}
+            </b>
           </div>
           <div className="flex items-center justify-between w-full border-b border-gray-100 py-2 text-gray-600">
             <p>Total</p>
-            <b>${getCartTotal().toFixed(2)}</b>
+            <b>
+              GH₵
+              {getCartSubtotal() > 0
+                ? (getCartTotal() + deliveryFee).toFixed(2)
+                : (0).toFixed(2)}
+            </b>
           </div>
         </div>
 
