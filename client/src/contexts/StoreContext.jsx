@@ -5,6 +5,9 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState({});
+    const deliveryFee = 5.3; // Example fixed fee
+    const [promoCode, setPromoCode] = useState("");
+    const [discount, setDiscount] = useState(0);
 
     const addToCart = (itemId) => {
         setCartItems((prev) => ({
@@ -26,7 +29,6 @@ const StoreContextProvider = ({ children }) => {
         });
     };
 
-    // Delete item from cart regardless of quantity
     const deleteFromCart = (id) => {
         setCartItems((prevCartItems) => {
             const newCartItems = { ...prevCartItems };
@@ -35,9 +37,41 @@ const StoreContextProvider = ({ children }) => {
         });
     };
 
-    // Clear the entire cart
     const clearCart = () => {
         setCartItems({});
+        setPromoCode("");
+        setDiscount(0);
+    };
+    // Get total number of items in cart
+    const getCartCount = () => {
+        return Object.values(cartItems).reduce((acc, curr) => acc + curr, 0);
+    };
+    // Calculate subtotal
+    const getCartSubtotal = () => {
+        let subtotal = 0;
+        for (const id in cartItems) {
+            const item = food_list.find((food) => food._id === id);
+            if (item) {
+                subtotal += item.price * cartItems[id];
+            }
+        }
+        return subtotal;
+    };
+
+    // Calculate total (subtotal + delivery - discount)
+    const getCartTotal = () => {
+        return getCartSubtotal() + deliveryFee - discount;
+    };
+
+    // Apply promo code (example: "SAVE10" gives $10 off)
+    const applyPromoCode = (code) => {
+        if (code === "SAVE10") {
+            setPromoCode(code);
+            setDiscount(10);
+        } else {
+            setPromoCode("");
+            setDiscount(0);
+        }
     };
 
     useEffect(() => {
@@ -52,6 +86,13 @@ const StoreContextProvider = ({ children }) => {
         removeFromCart,
         deleteFromCart,
         clearCart,
+        deliveryFee,
+        promoCode,
+        discount,
+        getCartSubtotal,
+        getCartTotal,
+        applyPromoCode,
+        getCartCount
     };
 
     return (

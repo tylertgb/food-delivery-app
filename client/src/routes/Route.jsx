@@ -16,5 +16,6 @@ export const router = createBrowserRouter([
       { path: 'order', element: <PlaceOrder /> },
     ],
     },
-    {path: 'cart', element: <Cart/>}
+    {path: 'cart', element: <Cart/>},
+    {path: 'order', element: <PlaceOrder/>}
 ]);
